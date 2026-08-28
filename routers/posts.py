@@ -18,6 +18,7 @@ async def get_posts(db: Annotated[AsyncSession, Depends(get_db)]):
     stmt = (
         select(models.Post)
         .options(joinedload(models.Post.author))
+        .order_by(models.Post.date_posted.desc())
     )
     result = await db.execute(stmt)
     posts = result.scalars().unique().all()

@@ -70,7 +70,6 @@ async def post_page(
         select(models.Post)
         .where(models.Post.id == post_id)
         .options(joinedload(models.Post.author))
-        .order_by(models.Post.date_posted.desc())
     )
     result = await db.execute(stmt)
     post = result.scalars().unique().first()
