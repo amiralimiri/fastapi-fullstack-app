@@ -2,22 +2,27 @@ from typing import Annotated
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, EmailStr
 
-# user
+
+##################### users #####################
 class UserBase(BaseModel):
     username: Annotated[str, Field(min_length=1, max_length=50)]
     email: Annotated[EmailStr, Field(max_length=120)]
     
     
 class UserCreate(UserBase):
-    pass
+    password: Annotated[str, Field(min_length=8)]
     
     
-class UserResponse(UserBase):
+class UserPublic(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     
     id: int
+    username: str
     image_file: str | None
     image_path: str
+    
+class UserPrivate(UserPublic):
+    email: EmailStr
     
     
 class UserUpdate(BaseModel):
@@ -26,7 +31,13 @@ class UserUpdate(BaseModel):
     image_file: Annotated[str | None, Field(min_length=1, max_length=200)] = None
     
     
-# post
+##################### tokens #####################
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    
+    
+##################### posts #####################
 class PostBase(BaseModel):
     title: Annotated[str, Field(min_length=1, max_length=100)]
     content: Annotated[str, Field(min_length=1)]
@@ -40,7 +51,7 @@ class PostResponse(PostBase):
     id: int
     user_id: int
     date_posted: datetime
-    author: UserResponse
+    author: UserPublic
 
 class PostUpdate(BaseModel):
     title: Annotated[str | None, Field(min_length=1, max_length=100)] = None

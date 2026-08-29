@@ -117,6 +117,23 @@ async def user_posts_page(
         },
     )
     
+
+@app.get("/login", include_in_schema=False)
+async def login_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "login.html",
+        {"title": "Login"},
+    )
+
+
+@app.get("/register", include_in_schema=False)
+async def register_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "register.html",
+        {"title": "Register"},
+    )
     
 ################# exception_handler #################
 @app.exception_handler(StarletteHTTPException)
