@@ -43,7 +43,7 @@ class PostBase(BaseModel):
     content: Annotated[str, Field(min_length=1)]
 
 class PostCreate(PostBase):
-    user_id: int # temp
+    pass
     
 class PostResponse(PostBase):
     model_config = ConfigDict(from_attributes=True)
