@@ -28,7 +28,6 @@ class UserPrivate(UserPublic):
 class UserUpdate(BaseModel):
     username: Annotated[str | None, Field(min_length=1, max_length=50)] = None
     email: Annotated[EmailStr | None, Field(max_length=120)] = None
-    image_file: Annotated[str | None, Field(min_length=1, max_length=200)] = None
     
     
 ##################### tokens #####################
