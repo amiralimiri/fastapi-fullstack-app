@@ -222,3 +222,6 @@ __marimo__/
 blog.db
 *.sqlite3
 *.db
+
+# profile pics
+/media

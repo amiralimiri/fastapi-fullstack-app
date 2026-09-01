@@ -41,8 +41,15 @@ class PostBase(BaseModel):
     title: Annotated[str, Field(min_length=1, max_length=100)]
     content: Annotated[str, Field(min_length=1)]
 
+
 class PostCreate(PostBase):
     pass
+    
+
+class PostUpdate(BaseModel):
+    title: Annotated[str | None, Field(min_length=1, max_length=100)] = None
+    content: Annotated[str | None, Field(min_length=1)] = None
+    
     
 class PostResponse(PostBase):
     model_config = ConfigDict(from_attributes=True)
@@ -51,7 +58,11 @@ class PostResponse(PostBase):
     user_id: int
     date_posted: datetime
     author: UserPublic
-
-class PostUpdate(BaseModel):
-    title: Annotated[str | None, Field(min_length=1, max_length=100)] = None
-    content: Annotated[str | None, Field(min_length=1)] = None
+    
+    
+class PaginatedPostsResponse(BaseModel):
+    posts: list[PostResponse]
+    total: int
+    skip: int
+    limit: int
+    has_more: bool

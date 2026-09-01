@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
     
     max_upload_size_bytes: int = 5 * 1024 * 1024 # 5MB
+    
+    posts_per_page: int = 5
 
 
 settings = Settings()  # type: ignore[call-arg] # Loaded from .env file
