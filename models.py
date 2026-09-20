@@ -40,7 +40,7 @@ class Post(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     title: Mapped[str] = mapped_column(String(100))
     content: Mapped[str] = mapped_column(Text)
-    
+    likes: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
 
     date_posted: Mapped[datetime] = mapped_column(
