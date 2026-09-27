@@ -15,8 +15,15 @@ dependencies = [
     "pwdlib[argon2]>=0.3.1",
     "pydantic-settings>=2.15.0",
     "pyjwt>=2.13.0",
+    "pytest>=9.1.1",
     "sqlalchemy>=2.0.52",
 ]
 
 [tool.fastapi]
 entrypoint = "main:app"
+
+[dependency-groups]
+dev = [
+    "moto[s3]>=5.2.3",
+    "pytest>=9.1.1",
+]

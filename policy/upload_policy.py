@@ -1,8 +1,7 @@
 import json
 import os
 import boto3
-from botocore.exceptions import ClientError
-from image_utils import _get_s3_client  
+from botocore.exceptions import ClientError 
 from config import settings     
 
 
